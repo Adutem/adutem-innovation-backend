@@ -9,7 +9,12 @@ import {
   routeNotFound,
   errorHandler,
 } from "./middlewares";
-import { authRouter, contactRouter, holidayRouter } from "./routes";
+import {
+  authRouter,
+  contactRouter,
+  holidayRouter,
+  analyticsRouter,
+} from "./routes";
 
 // Configure env
 dotenv.config();
@@ -51,6 +56,7 @@ app.use(requestLogger); // Log any incoming request to the console
 appRouter.use("/contact", contactRouter);
 appRouter.use("/holiday", holidayRouter);
 appRouter.use("/auth", authRouter);
+appRouter.use("/analytics", analyticsRouter);
 app.use("/adutem/api/v1", appRouter);
 
 app.get("/", (req, res) => {

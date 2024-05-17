@@ -4,3 +4,4 @@ export * from "./throw-request-error";
 export * from "./check-empty-req-body";
 export * from "./router-creator";
 export * from "./otp";
+export * from "./analytics";

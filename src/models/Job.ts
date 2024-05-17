@@ -68,6 +68,6 @@ const JobSchema: Schema<IJobs> = new Schema<IJobs>(
   { timestamps: true }
 );
 
-const Job: Model<IJobs> = model<IJobs>("Jobs", JobSchema);
+const Jobs: Model<IJobs> = model<IJobs>("Jobs", JobSchema);
 
-export default Job;
+export default Jobs;
