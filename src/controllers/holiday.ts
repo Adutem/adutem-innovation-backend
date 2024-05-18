@@ -20,10 +20,9 @@ export const createHoliday = async (req: Request, res: Response) => {
   const data = req.body;
   throwErrorIfBodyIsEmpty(
     data,
-    ["textContent", "date"],
+    ["textContent", "startDate", "endDate"],
     "Provide all required fields"
   );
-  const { textContent, date } = data;
   const holiday = await Holiday.create(data);
   return sendSuccessResponse(
     res,
@@ -38,6 +37,7 @@ export const updateHoliday = async (req: Request, res: Response) => {
   const { holidayId } = req.params;
   const holiday = await Holiday.findByIdAndUpdate(holidayId, data, {
     new: true,
+    runValidators: true,
   });
   if (!holiday) throwNotFoundError("Resource not found");
   return sendSuccessResponse(res, { holiday, message: "Holiday Updated" });
