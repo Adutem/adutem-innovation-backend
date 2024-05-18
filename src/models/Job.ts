@@ -41,7 +41,7 @@ const JobSchema: Schema<IJobs> = new Schema<IJobs>(
       type: String, // TODO: Add validation for URL
       required: [true, "Please provide contact link"],
       validate: {
-        validator: (value: string) => {
+        validator: function (value: string) {
           const thisSchema = this as any;
           if (thisSchema.ownerDocument()) {
             const { contactLinkType } = thisSchema.ownerDocument() as IJobs;
