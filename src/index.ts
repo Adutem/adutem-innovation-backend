@@ -14,6 +14,7 @@ import {
   contactRouter,
   holidayRouter,
   analyticsRouter,
+  jobRouter,
 } from "./routes";
 
 // Configure env
@@ -57,6 +58,7 @@ appRouter.use("/contact", contactRouter);
 appRouter.use("/holiday", holidayRouter);
 appRouter.use("/auth", authRouter);
 appRouter.use("/analytics", analyticsRouter);
+appRouter.use("/jobs", jobRouter);
 app.use("/adutem/api/v1", appRouter);
 
 app.get("/", (req, res) => {
