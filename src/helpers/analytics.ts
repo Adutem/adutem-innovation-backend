@@ -11,10 +11,10 @@ export enum TABS {
   ANALYTICS = "pills-analytics",
   HOLIDAY = "pills-holiday",
   JOBS = "pills-jobs",
-  NEWS = "pills-news",
+  BLOG = "pills-news",
 }
 
-export type TabOption = TABS.ANALYTICS | TABS.HOLIDAY | TABS.JOBS | TABS.NEWS;
+export type TabOption = TABS.ANALYTICS | TABS.HOLIDAY | TABS.JOBS | TABS.BLOG;
 
 export function generateSuffix(num: number) {
   if (num >= 1000000) {
@@ -79,13 +79,13 @@ export const createJobStat = (totalCount: number) =>
 
 export const createNewsStat = (totalCount: number) =>
   createStatData({
-    label: "News",
+    label: "Blogs",
     colorClass: "success",
     percentageSign: "+",
     percentage: 23.48,
     totalCount,
     linkType: "section",
     link: "See details",
-    linkUrl: TABS.NEWS,
+    linkUrl: TABS.BLOG,
     widgetIconClass: "fi fi-rr-radio",
   });
