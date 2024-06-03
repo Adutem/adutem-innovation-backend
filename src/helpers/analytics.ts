@@ -77,7 +77,7 @@ export const createJobStat = (totalCount: number) =>
     widgetIconClass: "fi fi-rr-umbrella-beach",
   });
 
-export const createNewsStat = (totalCount: number) =>
+export const createBlogStat = (totalCount: number) =>
   createStatData({
     label: "Blogs",
     colorClass: "success",

@@ -2,6 +2,7 @@ import "express-async-errors";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import http from "http";
 import connectDB from "./connection/mongodb";
 import {
   requestLogger,
@@ -15,6 +16,7 @@ import {
   holidayRouter,
   analyticsRouter,
   jobRouter,
+  blogRouter,
 } from "./routes";
 
 // Configure env
@@ -22,6 +24,9 @@ dotenv.config();
 
 // Initialize an express app
 const app = express();
+
+// Create node server
+const server = http.createServer(app);
 
 // Create a root router
 const appRouter = express.Router();
@@ -36,6 +41,7 @@ const HOSTNAME =
 const corsOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(",")
   : [];
+
 app.use(
   cors({
     origin: [
@@ -59,6 +65,7 @@ appRouter.use("/holiday", holidayRouter);
 appRouter.use("/auth", authRouter);
 appRouter.use("/analytics", analyticsRouter);
 appRouter.use("/jobs", jobRouter);
+appRouter.use("/blog", blogRouter);
 app.use("/adutem/api/v1", appRouter);
 
 app.get("/", (req, res) => {
@@ -72,10 +79,23 @@ app.get("/", (req, res) => {
 app.all("*", routeNotFound); // Returns a 404 response for such routes
 app.use(errorHandler); // Handles all error in the app
 
-const startServer = () =>
-  app.listen(PORT, HOSTNAME || "", () => {
+server.on("error", (error: any) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(`Port ${PORT} is already in use. Trying a different port...`);
+    const NEW_PORT = Number(PORT) + 1;
+    server.listen(NEW_PORT, HOSTNAME || "", () => {
+      console.log(`Server is running on http://${HOSTNAME}:${NEW_PORT}`);
+    });
+  } else {
+    console.error("Server error:", error);
+  }
+});
+
+const startServer = () => {
+  server.listen(PORT, HOSTNAME || "", () => {
     console.log(`Server is running on http://${HOSTNAME}:${PORT}`);
   });
+};
 
 connectDB(startServer);
 // startServer();
