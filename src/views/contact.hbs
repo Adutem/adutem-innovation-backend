@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
         body {
@@ -43,6 +44,9 @@
             {{/if}}
             {{#if organization}}
             <p class="text" style="margin: 8px 0x; padding: 0px;">Phone Organization: {{organization}}</p>
+            {{/if}}
+            {{#if message}}
+            <p class="text" style="margin: 8px 0x; padding: 0px;">Message: {{message}}</p>
             {{/if}}
             {{/with}}
         </div>
