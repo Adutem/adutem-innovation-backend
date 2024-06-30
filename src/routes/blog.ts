@@ -7,8 +7,9 @@ const upload = multer();
 
 const blogRouter = routerCreator();
 
+blogRouter.get("/", getAllBlogs);
 blogRouter.use(validateToken);
-blogRouter.route("/").post(upload.any(), createBlog).get(getAllBlogs);
+blogRouter.route("/").post(upload.any(), createBlog);
 blogRouter.route("/:blogId").delete(deleteBlog);
 
 export default blogRouter;
