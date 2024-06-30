@@ -22,8 +22,10 @@ type ContactEmailProps = {
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  requireTLS: true,
+  // port: 587,
+  // requireTLS: true,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.SMTPPASS,
@@ -61,8 +63,8 @@ export const sendContactEmail = (data: ContactEmailProps) => {
   let mailOptions = {
     // from: process.env.EMAIL,
     from: `${data.fullName} <${data.email}>`,
-    // to: "Adutem05@gmail.com",
-    to: "philipowolabi79@gmail.com",
+    to: "Adutem05@gmail.com",
+    // to: "philipowolabi79@gmail.com",
     // subject: "New Contact",
     subject: "Someone just reached out to you.",
     template: "contact",
