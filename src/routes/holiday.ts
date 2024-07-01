@@ -4,8 +4,9 @@ import { validateToken } from "../middlewares";
 
 const holidayRouter = routerCreator();
 
+holidayRouter.route("/").get(getHoliday);
 holidayRouter.use(validateToken);
-holidayRouter.route("/").get(getHoliday).post(createHoliday);
+holidayRouter.route("/").post(createHoliday);
 holidayRouter.patch("/:holidayId", updateHoliday);
 
 export default holidayRouter;
