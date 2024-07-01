@@ -10,7 +10,8 @@ export const getHoliday = async (req: Request, res: Response) => {
   let queryObject: Record<string, any> = {};
   if (type && type === "active") {
     const today = new Date();
-    queryObject.date = { $gte: today };
+    queryObject.endDate = { $gte: today };
+    queryObject.isDeactivated = false;
   }
   holiday = await Holiday.findOne(queryObject);
   return res.status(StatusCodes.OK).json({ success: true, holiday: holiday });
