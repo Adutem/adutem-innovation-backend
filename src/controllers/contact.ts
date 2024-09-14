@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { throwErrorIfBodyIsEmpty } from "../utils";
-import { sendContactEmail, sendEmail, sendSuccessResponse } from "../helpers";
+import {
+  sendContactEmail,
+  sendEmail,
+  sendSuccessResponse,
+  submitSurveyEmail,
+} from "../helpers";
 
 export const submitContactRequest = async (req: Request, res: Response) => {
   const data = req.body;
@@ -13,4 +18,11 @@ export const submitContactRequest = async (req: Request, res: Response) => {
   return sendSuccessResponse(res, {
     message: "Form submitted successfully. Kindly await our response.",
   });
+};
+
+export const submitSurvey = async (req: Request, res: Response) => {
+  const data = req.body;
+  throwErrorIfBodyIsEmpty(data, [], "Please provide all required fields");
+  await submitSurveyEmail(data);
+  return sendSuccessResponse(res, { message: "Thank you for your time!" });
 };

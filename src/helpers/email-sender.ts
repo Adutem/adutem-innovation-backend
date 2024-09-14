@@ -75,6 +75,20 @@ export const sendContactEmail = (data: ContactEmailProps) => {
   return sendEmail(mailOptions);
 };
 
+export const submitSurveyEmail = async (data: any) => {
+  let mailOptions = {
+    from: `<Adutem Survey Website>`,
+    to: "Adutem05@gmail.com",
+    // to: "philipowolabi79@gmail.com",
+    subject: "New Survey Submitted!",
+    template: "survey",
+    context: {
+      body: data,
+    },
+  };
+  return sendEmail(mailOptions);
+};
+
 export const sendOtpEmail = (data: VerifyEmailProps) => {
   let mailOptions = {
     from: "Philip from Adutem",
